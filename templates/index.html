@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="panel-group" id="card-projects">
+                    {% for p in projects %}
+
+                        <div class="card card-default">
+                            <div class="card-heading">
+                                <a class="card-title collapsed" data-toggle="collapse" data-parent="#card-projects"
+                                   href="#{{ p.project_name }}">{{ p.project_name }}</a>
+                            </div>
+                            <div id="{{ p.project_name }}" class="card-collapse collapse">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr class="table-info">
+                                            <td>
+                                                Role
+                                            </td>
+                                            <td>
+                                                Date
+                                            </td>
+                                            <td>
+                                                HeadCount_Reg
+                                            </td>
+                                            <td>
+                                                HeadCount_OT
+                                            </td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for c in hc %}
+                                            {% if p.project_id == c.project_id %}
+
+                                                <tr class="table-active">
+                                                    <td>
+                                                        {{ c.role_id }}
+                                                    </td>
+                                                    <td>
+                                                        {{ c.date }}
+                                                    </td>
+                                                    <td>
+                                                        {{ c.headcountreg }}
+                                                    </td>
+                                                    <td>
+                                                        {{ c.headcountot }}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+
+                                    {% csrf_token %}
+                                    <form action="/chcm/index/" method="post">
+                                        Role
+                                        <br/>
+                                        <input type="number" name="hc_role">
+                                        <br/>
+                                        Date:
+                                        <br/>
+                                        <input type="date" name="hc_date">
+                                        <br/>
+                                        HeadCount_reg:
+                                        <br/>
+                                        <input type="number" name="hc_reg">
+                                        <br/>
+                                        HeadCount_OT:
+                                        <br/>
+                                        <input type="number" name="hc_ot">
+                                        <br/>
+                                        <input type="hidden" name="hc_project" value="{{ p.project_id }}">
+                                        <input type="submit" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

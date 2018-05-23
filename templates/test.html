@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td colspan=2>aa</td>
+                                                                        <td colspan=2>bb</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>a</td>
+                                                                        <td>b</td>
+                                                                        <td>c</td>
+                                                                        <td>d</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="table-active">
+                                                                        <td>
+                                                                            1
+                                                                        </td>
+                                                                        <td>
+                                                                            2
+                                                                        </td>
+                                                                        <td>
+                                                                            3
+                                                                        </td>
+                                                                        <td>
+                                                                            4
+                                                                        </td>
+                                                                    </tr>
+
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+            {% csrf_token %}
+            <form action="/chcm/index/" method="post">
+                Date:
+                <br/>
+                <input type="date" name="hc_date">
+                HeadCount_reg:
+                <br/>
+                <input type="number" name="hc_reg">
+                <br/>
+                HeadCount_OT:
+                <br/>
+                <input type="number" name="hc_ot">
+                <br/>
+                <input type="submit" value="Submit">
+            </form>
+
+
+
+
+{% endblock %}
